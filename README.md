@@ -9,7 +9,7 @@
     git checkout main 
 
 # Run Ambiente virtual 
-.... # Instalacao  ambiente virtual  
+.... Instalacao  ambiente virtual  
     pip install flask
     python -m venv School_InventoryController 
     School_InventoryController/Scripts/activate
