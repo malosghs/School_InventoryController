@@ -15,14 +15,14 @@ from models.categoria_model import CategoriaModel
 from models.database import Database
 from models.emprestimo_model import EmprestimoModel
 from models.item_model import ItemModel
-
+from models.config_database import CONFIG_DB_SCHOOL
 
 
 
 def main(page: ft.Page):
     controller = ControllerMain()
     view = MainPageView(page,AnimacoesPage(),AnimacoesBotao(),controller)
-    models = MainModel(Database,CategoriaModel,ItemModel,EmprestimoModel)
+    models = MainModel(Database(CONFIG_DB_SCHOOL),CategoriaModel,ItemModel,EmprestimoModel)
 
     controller.view = view 
     controller.models = models
