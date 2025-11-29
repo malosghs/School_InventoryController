@@ -168,7 +168,7 @@ class Database():
     },
 ]
 
-            usuarios = [
+                usuarios = [
                 {
                     "Nome": "Carlos",
                     "Cargo": "Coordenador Administrativo",
@@ -196,25 +196,25 @@ class Database():
             ]
 
 
-            for item in inventario:
-                quantidade = item["Quantidade"]
-                nome  = item["Nome_do_Item"]
-                codigo = item["Codificacao"]
-                categoria  = item["Categoria"]
-                tipo  =  item["Tipo"]
-                local  = item["Localizacao"]
-                estado = item["Estado_de_Uso"]
-                status = item["Status"]
-                descricao  = item["Descricao"]
-                for i in range(quantidade):
-                    print(codigo,nome,categoria,tipo,local,status,descricao)
+                for item in inventario:
+                  quantidade = item["Quantidade"]
+                  nome  = item["Nome_do_Item"]
+                  codigo = item["Codificacao"]
+                  categoria  = item["Categoria"]
+                  tipo  =  item["Tipo"]
+                  local  = item["Localizacao"]
+                  estado = item["Estado_de_Uso"]
+                  status = item["Status"]
+                  descricao  = item["Descricao"]
+                  for i in range(quantidade):
+                     print(codigo,nome,categoria,tipo,local,status,descricao)
 
-            for item in usuarios:
-                nome  = item["Nome"]
-                cargo = item["Cargo"]
-                nivel  = item["Nivel_Acesso"]
-                senha  =  item["Senha"]
-                status = item["Status"]
-                descricao  = item["Descricao"]
+                for item in usuarios:
+                     nome  = item["Nome"]
+                     cargo = item["Cargo"]
+                     nivel  = item["Nivel_Acesso"]
+                     senha  =  item["Senha"]
+                     status = item["Status"]
+                     descricao  = item["Descricao"]
     
                 

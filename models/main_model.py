@@ -4,4 +4,5 @@ class MainModel:
         self.categoria_model = categoria_model
         self.item_model = item_model
         self.emprestimo_model = emprestimo_model
+
         
