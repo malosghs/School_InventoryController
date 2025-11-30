@@ -1,13 +1,13 @@
-import psycopg2
 class Database():
-    def __init__(self,config):
-        self.config = config
+    def __init__(self,psycopg2,config):
+        self.config =   config
+        self.psycopg2 = psycopg2
 
     def get_db_connect(self):
         try: 
             conn = self.config
             return conn
-        except psycopg2.OperationalError as e: 
+        except self.psycopg2.OperationalError as e: 
             print(f"Erro ao conectar ao Banco De Dados")
     def create_table(self,conn): 
         create_table_itens_query = """
@@ -33,9 +33,11 @@ class Database():
                 cursor.execute(create_table_itens_query)
                 cursor.execute(create_table_usuario_query)
             conn.commit()
-        except psycopg2.OperationalError:
+        except self.psycopg2.OperationalError:
             print("ERROR DE OPERAÇÃO NA CRIAÇÃO DE TABELAS")
             cursor.rollback()
+    """
+    
     def add_itens_in_table(self,conn):
         "Adiciona os itens padrão na tabela"
         try:
@@ -217,4 +219,4 @@ class Database():
                      status = item["Status"]
                      descricao  = item["Descricao"]
     
-                
+                """
