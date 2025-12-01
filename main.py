@@ -20,14 +20,13 @@ from models.item_model import ItemModel
 def main(page: ft.Page):
     controller = ControllerMain()
     view = MainPageView(page,AnimacoesPage(),AnimacoesBotao(),controller)
-    models = MainModel(Database(CONFIG_DB_SCHOOL),CategoriaModel,ItemModel,EmprestimoModel)
-"""
+    models = MainModel(Database(CONFIG_DB_SCHOOL),CategoriaModel,ItemModel,EmprestimoModel)  
+
     controller.view = view 
     controller.models = models
 
     controller.construir_page() # Imprementar funcao 
-"""
-"""
+
  # Instância da VIEW sem controller
     view = MainPageView(
         page,
@@ -45,6 +44,6 @@ def main(page: ft.Page):
     # Renderiza conteúdo
     page.add(layout)
 
-"""
+
 if __name__ == "__main__":
     ft.app(target=main)
