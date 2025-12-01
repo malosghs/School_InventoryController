@@ -1,11 +1,12 @@
 class ItemModel:
-   def __init__(self,item):
-      self.item = Item([i for i in item])
-   def req_emprestimo():
+   def __init__(self,item,acao_models):
+      self.item =        Item([i for i in item])
+      self.acao_models = acao_models
+   def req_atualizacao(self):
       pass
    def req_pedido_acao(self,):
        pass
-   def req_deletar():
+   def req_deletar(self):
       pass
 
 

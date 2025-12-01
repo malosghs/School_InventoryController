@@ -1,4 +1,5 @@
 import Flet as ft
+import psycopg2
 # View imports
  
 from views.main_window import MainPageView
@@ -14,18 +15,22 @@ from models.main_model import MainModel
 from models.categoria_model import CategoriaModel
 from models.database import Database
 from models.config_database import CONFIG_DB_SCHOOL
-from models.emprestimo_model import EmprestimoModel
+from models.acao_model import AcaoPageItem
 from models.item_model import ItemModel
 
 def main(page: ft.Page):
     controller = ControllerMain()
-    view = MainPageView(page,AnimacoesPage(),AnimacoesBotao(),controller)
-    models = MainModel(Database(CONFIG_DB_SCHOOL),CategoriaModel,ItemModel,EmprestimoModel)  
+
+    view = MainPageView(page,AnimacoesPage,AnimacoesBotao,controller)
+    models = MainModel(Database(psycopg2,CONFIG_DB_SCHOOL),CategoriaModel,ItemModel,AcaoPageItem)
+
 
     controller.view = view 
     controller.models = models
 
     controller.construir_page() # Imprementar funcao 
+
+"""
 
  # Instância da VIEW sem controller
     view = MainPageView(
@@ -43,7 +48,7 @@ def main(page: ft.Page):
 
     # Renderiza conteúdo
     page.add(layout)
-
+"""
 
 if __name__ == "__main__":
     ft.app(target=main)

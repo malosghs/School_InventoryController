@@ -1,12 +1,13 @@
-import psycopg2
-from config_database import *
+
 class Database():
-    def __init__(self,config):
-        self.config = config
+    def __init__(self,psycopg2,config):
+        self.config =   config
+        self.psycopg2 = psycopg2
 
 
     def get_db_connect(self):
         try: 
+
             conn = psycopg2.connect(self.config)
             db = Database
             db.create_table(conn)
@@ -62,12 +63,38 @@ class Database():
     """
 
         try:
+            conn = self.config
+            return conn
+        except self.psycopg2.OperationalError as e: 
+            print(f"Erro ao conectar ao Banco De Dados")
+    def create_table(self,conn): 
+        create_table_itens_query = """
+            CREATE TABLE IF NOT EXISTS school_inventory(
+                id BIGSERIAL PRIMARY KEY,
+                nome_item VARCHAR(100) NOT NULL,
+                categoria VARCHAR(100) NOT NULL,
+                tipo VARCHAR(100) NOT NULL,
+                localizacao VARCHAR(255) NOT NULL,
+                estado_uso VARCHAR(255) NOT NULL,
+                status VARCHAR(255) NOT NULL,
+                descricao TEXT
+                );"""
+        create_table_usuario_query = """
+            CREATE TABLE IF NOT EXISTS controller_users (
+                id SERIAL PRIMARY KEY, 
+                nome_user VARCHAR(100) NOT NULL,
+                cargo_operacional VARCHAR(255) NOT NULL,
+                limitador INT NOT NULL
+                );"""
+
+        try:
             with conn.cursor() as cursor:
                 cursor.execute(create_tables)
             conn.commit()
-        except psycopg2.OperationalError:
+        except self.psycopg2.OperationalError:
             print("ERROR DE OPERAÇÃO NA CRIAÇÃO DE TABELAS")
             cursor.rollback()
+
     def inserir_dados(self, conn):
         inserir = """
         INSERT INTO controller_estado (name_estado)
@@ -83,6 +110,11 @@ class Database():
         ON CONFLICT DO NOTHING;
         """
 
+    """
+    
+    def add_itens_in_table(self,conn):
+        "Adiciona os itens padrão na tabela"
+ models_dev_init
         try:
             with conn.cursor() as cursor:
                 cursor.execute(inserir)
@@ -150,10 +182,10 @@ class Database():
 """
     def add_item(conn,dict):
         "Entrada é um dicionario dos Itens que já foram cadastrados"
-        = 
+        """
         INSERT INTO school_inventory 
         (nome_item, categoria, tipo, number_local, estado_uso, status, descricao)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)"""
         
                 for item in inventario:
                   quantidade = item["Quantidade"]
@@ -186,4 +218,5 @@ class Database():
                      senha  =  item["Senha"]
                      status = item["Status"]
                      descricao  = item["Descricao"]
-                     """
+
+         

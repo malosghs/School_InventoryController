@@ -2,7 +2,11 @@
 __pycache__/
 *.py[codz]
 *$py.class
+
+#virtualizador 
 School_InventoryController/
+.venv/
+
 # C extensions
 *.so
 
