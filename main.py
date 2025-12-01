@@ -1,4 +1,4 @@
-import Flet as ft
+import flet as ft
 # View imports
  
 from views.main_window import MainPageView
