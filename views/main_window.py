@@ -13,17 +13,48 @@ class MainPageView:
         # SIDEBAR
         # -------------------
 
-            sidebar = ft.NavigationRail()
+
+        sidebar = ft.NavigationRail(
+
             selected_index=0,
             label_type=ft.NavigationRailLabelType.ALL,
             min_width=90,
             min_extended_width=220,
-            group_alignment=-0.2,      # Ícones mais pra baixo 👇
-            indicator_color=ft.colors.BLUE_GREY_100,
+            group_alignment=-0.2,
+            indicator_color=ft.Colors.BLUE_GREY_100,
             indicator_shape=ft.RoundedRectangleBorder(radius=12),
-            leading=ft.Container(height=80),     # empurra o menu pra baixo
+            leading=ft.Container(height=80),
+
             destinations=[
                 ft.NavigationRailDestination(
-                    icon_content=ft.Container(
-                        width=40,
-                    ))]
+                    icon="home",          # <-- COMPATÍVEL COM A TUA VERSÃO
+                    label="Início",
+                ),
+                ft.NavigationRailDestination(
+                    icon="inventory",
+                    label="Inventário",
+                ),
+                ft.NavigationRailDestination(
+                    icon="settings",
+                    label="Configurações",
+                ),
+            ]
+        )
+
+        # -------------------
+        # LAYOUT
+        # -------------------
+
+        layout = ft.Row(
+            expand=True,
+            controls=[
+                sidebar,
+                ft.VerticalDivider(width=1),
+                ft.Container(
+                    expand=True,
+                    content=ft.Text("Conteúdo principal aqui...", size=20),
+                ),
+            ],
+        )
+
+        return layout

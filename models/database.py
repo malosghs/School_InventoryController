@@ -1,4 +1,5 @@
 
+
 class Database():
     def __init__(self,psycopg2,config):
         self.config =   config
@@ -68,6 +69,7 @@ class Database():
         except self.psycopg2.OperationalError as e: 
             print(f"Erro ao conectar ao Banco De Dados")
     def create_table(self,conn): 
+
         create_table_itens_query = """
             CREATE TABLE IF NOT EXISTS school_inventory(
                 id BIGSERIAL PRIMARY KEY,
@@ -78,22 +80,20 @@ class Database():
                 estado_uso VARCHAR(255) NOT NULL,
                 status VARCHAR(255) NOT NULL,
                 descricao TEXT
-                );"""
+            );
+        """
+
         create_table_usuario_query = """
             CREATE TABLE IF NOT EXISTS controller_users (
                 id SERIAL PRIMARY KEY, 
                 nome_user VARCHAR(100) NOT NULL,
                 cargo_operacional VARCHAR(255) NOT NULL,
                 limitador INT NOT NULL
+[]
                 );"""
 
-        try:
-            with conn.cursor() as cursor:
-                cursor.execute(create_tables)
-            conn.commit()
-        except self.psycopg2.OperationalError:
-            print("ERROR DE OPERAÇÃO NA CRIAÇÃO DE TABELAS")
-            cursor.rollback()
+
+        cursor.rollback()
 
     def inserir_dados(self, conn):
         inserir = """
@@ -113,10 +113,12 @@ class Database():
     """
     
     def add_itens_in_table(self,conn):
+
         "Adiciona os itens padrão na tabela"
  models_dev_init
         try:
             with conn.cursor() as cursor:
+
                 cursor.execute(inserir)
             conn.commit()
         except Exception as e:
@@ -219,4 +221,4 @@ class Database():
                      status = item["Status"]
                      descricao  = item["Descricao"]
 
-         
+ 

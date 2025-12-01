@@ -1,5 +1,7 @@
+
 import Flet as ft
 import psycopg2
+
 # View imports
  
 from views.main_window import MainPageView
