@@ -13,7 +13,7 @@ class MainPageView:
         # SIDEBAR
         # -------------------
 
-        sidebar = ft.NavigationRail()
+            sidebar = ft.NavigationRail()
             selected_index=0,
             label_type=ft.NavigationRailLabelType.ALL,
             min_width=90,

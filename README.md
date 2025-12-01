@@ -14,6 +14,8 @@
 
 # Run Ambiente virtual 
 .... Instalacao  do  ambiente virtual  
+
+
     pip install flask # Instalando o virtualizador  
     python -m venv School_InventoryController # Criando o ambiente virtual 
     School_InventoryController/Scripts/activate # Iniciando o ambiente virtual 

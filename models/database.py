@@ -187,7 +187,7 @@ class Database():
         (nome_item, categoria, tipo, number_local, estado_uso, status, descricao)
         VALUES (%s, %s, %s, %s, %s, %s, %s)"""
         
-                for item in inventario:
+        for item in inventario:
                   quantidade = item["Quantidade"]
                   nome  = item["Nome_do_Item"]
                   codigo = item["Codificacao"]
@@ -203,7 +203,7 @@ class Database():
                                 cursor.execute(seila, values)
                             conn.commit()
                             print("Item adicionado com sucesso!")
-                        except Exception as e:
+                       except Exception as e:
                             print("Erro ao adicionar item:", e)
                             conn.rollback()
 
@@ -211,7 +211,7 @@ class Database():
 
     def add_user(conn,dict):
         "Entrada é um dicionario dos users que já foram cadastrados"
-                for item in usuarios:
+        for item in usuarios:
                      nome  = item["Nome"]
                      cargo = item["Cargo"]
                      nivel  = item["Nivel_Acesso"]
