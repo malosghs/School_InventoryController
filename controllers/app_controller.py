@@ -5,4 +5,8 @@ class ControllerMain:
       self.models = None
    
    def construir_page(self):
-       self.view.construir_page_home()
+       self.view.construir_main_page()
+      
+
+  
+       

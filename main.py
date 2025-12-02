@@ -1,5 +1,5 @@
 
-import Flet as ft
+import flet as ft
 import psycopg2
 
 # View imports
@@ -30,27 +30,9 @@ def main(page: ft.Page):
     controller.view = view 
     controller.models = models
 
-    controller.construir_page() # Imprementar funcao 
+    controller.construir_page() 
 
-"""
 
- # Instância da VIEW sem controller
-    view = MainPageView(
-        page,
-        AnimacoesPage(),
-        AnimacoesBotao(),
-        controller=None   # <-- REMOVIDO
-    )
-
-    # Models (tu podes ou não precisar disto agora)
-    models = MainModel(Database, CategoriaModel, ItemModel, EmprestimoModel)
-
-    # Constrói a página principal diretamente
-    layout = view.construir_main_page()
-
-    # Renderiza conteúdo
-    page.add(layout)
-"""
 
 if __name__ == "__main__":
     ft.app(target=main)
