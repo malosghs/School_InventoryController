@@ -1,11 +1,12 @@
 import flet as ft
 
 class MainPageView:
-    def __init__(self, page: ft.Page, animador_pagina, animador_botao, controller):
+    def __init__(self, page: ft.Page, animador_pagina, animador_botao, controller,main_window):
         self.page = page
         self.animador_pagina = animador_pagina
         self.animador_botao = animador_botao
         self.controller = controller
+        self.main_window = main_window
 
     def construir_main_page(self):
         self.page.title = "School Inventory"
@@ -35,6 +36,7 @@ class MainPageView:
             indicator_color=ft.Colors.BLUE_GREY_100,
             indicator_shape=ft.RoundedRectangleBorder(radius=12),
             leading=ft.Container(height=80),
+            on_change=lambda e: print("Selected destination:", e.control.selected_index),
 
             destinations=[
                 ft.NavigationRailDestination(
@@ -64,10 +66,48 @@ class MainPageView:
                     selected_icon = ft.Icons.SETTINGS_OUTLINED
                 ),
             ]
+            
         )
+
+        self.tela_context =  ft.Container(
+                    expand=True,
+                    content=ft.Text("Conteúdo principal aqui...", size=20),
+                ),
 
  
  
+
+         
+      
+
+        self.controls = [
+            ft.Text("Cadastro de Item", size=26, weight=ft.FontWeight.BOLD),
+
+            ft.TextField(label="Nome do Item"),
+            ft.TextField(label="Codificação"),
+
+            ft.Dropdown(label="Categoria", options=[
+                ft.dropdown.Option("Cabeça"),
+                ft.dropdown.Option("Mãos"),
+                ft.dropdown.Option("Corpo"),
+            ]),
+
+            ft.Dropdown(label="Tipo", options=[
+                ft.dropdown.Option("Capacete"),
+                ft.dropdown.Option("Luva"),
+                ft.dropdown.Option("Jaleco"),
+            ]),
+
+            ft.TextField(label="Localização"),
+
+            ft.Dropdown(label="Estado", options=[
+                ft.dropdown.Option("Novo"),
+                ft.dropdown.Option("Em uso"),
+                ft.dropdown.Option("Danificado"),
+            ]),
+
+            ft.ElevatedButton("Salvar Item")
+        ]
 
 
         layout = ft.Column(
@@ -91,10 +131,10 @@ class MainPageView:
                 sidebar,
                 ft.VerticalDivider(width=1),
                 
-                ft.Container(
-                    expand=True,
-                    content=ft.Text("Conteúdo principal aqui...", size=20),
-                ),
+                 
+         
+                
+               
             ],
         )
         

@@ -12,14 +12,16 @@ class ItemModel:
 
 class Item:
    def __init__(self,id,nome,codigo,categoria,tipo,localizacao,estado,status,descrisao):
-      self.id =          id 
-      self.nome =        nome
-      self.codigo =      codigo
-      self.categoria =   categoria 
-      self.tipo =        tipo
-      self.localizacao = localizacao 
-      self.estado =      estado
-      self.status =      status 
-      self.descrisao =   descrisao 
+      dic = {'emprestado':'Devolver','devolvido':'Emprestar'}
+      self.id =           id 
+      self.nome =         nome
+      self.codigo =       codigo
+      self.categoria =    categoria 
+      self.tipo =         tipo
+      self.localizacao =  localizacao 
+      self.estado =       estado
+      self.status =       status 
+      self.descrisao =    descrisao 
+      self.status_butao = dic[status]
    
 
