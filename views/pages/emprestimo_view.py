@@ -1,20 +1,32 @@
-import flet as ft
 
-class EmprestimoView(ft.Column):
-    def __init__(self, page: ft.Page):
-        super().__init__()
-        self.page = page
 
-        self.busca = ft.TextField(label="ID Funcionário ou Código do Item")
+class EmprestimoView:
+       def __init__(self,ft, animador_pagina, animador_botao, controller):
+ 
+        
+        self.ft = ft 
 
-        self.controls = [
-            ft.Text("Registrar Empréstimo", size=26, weight=ft.FontWeight.BOLD),
+        self.animador_pagina = animador_pagina
+        self.animador_botao = animador_botao
+        self.controller = controller
+
+
+        self.busca = self.ft.TextField(label="ID Funcionário ou Código do Item")
+
+        self.page =self.ft.Column(
+           
+            
+            [ 
+            self.ft.Text("Registrar Empréstimo", size=26, weight=self.ft.FontWeight.BOLD),
             self.busca,
 
-            ft.Dropdown(label="Categoria"),
-            ft.Dropdown(label="Tipo"),
-            ft.Dropdown(label="Selecionar Item"),
-            ft.Dropdown(label="Funcionário"),
+            self.ft.Dropdown(label="Categoria"),
+            self.ft.Dropdown(label="Tipo"),
+            self.ft.Dropdown(label="Selecionar Item"),
+            self.ft.Dropdown(label="Funcionário"),
 
-            ft.ElevatedButton("Registrar Empréstimo")
-        ]
+            self.ft.ElevatedButton("Registrar Empréstimo")
+        ],
+         expand = True,
+         alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER
+        )

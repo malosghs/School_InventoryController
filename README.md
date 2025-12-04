@@ -12,7 +12,7 @@
     cd School_InventoryController
     git checkout main # Entra no ramo  pricipal  
 
-# Run Ambiente virtual 
+# Window Ambiente virtual 
 .... Instalacao  do  ambiente virtual  
 
 
@@ -22,7 +22,7 @@
     #  pip freeze > requirements.txt 
     pip install -r requirements.txt # Instalando as dependencias 
     
-    # Lixux 
+# Lixux  Ambiente virtual 
     pip install flask # Instalando o virtualizador  
     python3 -m venv School_InventoryController
     source School_InventoryController/bin/activate
