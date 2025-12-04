@@ -7,7 +7,7 @@ class ControllerMain:
       
    
    def construir_page(self):
-      self.view.construir_main_page()
+      self.view.construir_pagina_principal()
   
    def page_guia_open(self,escolha_page_num):
       if escolha_page_num == 0:

@@ -5,5 +5,5 @@ class AnimacoesPage:
       return  self.ft.Column(
             [self.ft.ProgressRing(), self.ft.Text("Carregando banco de dados")],
             horizontal_alignment=self.ft.CrossAxisAlignment.CENTER,
-        ),
+        )
 

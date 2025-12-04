@@ -19,8 +19,12 @@
     pip install flask # Instalando o virtualizador  
     python -m venv School_InventoryController # Criando o ambiente virtual 
     School_InventoryController/Scripts/activate # Iniciando o ambiente virtual 
-    pip freeze > requirements.txt 
+    #  pip freeze > requirements.txt 
     pip install -r requirements.txt # Instalando as dependencias 
     
-    
+    # Lixux 
+    pip install flask # Instalando o virtualizador  
+    python3 -m venv School_InventoryController
+    source School_InventoryController/bin/activate
+    pip install -r requirements.txt
 
