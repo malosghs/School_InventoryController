@@ -1,19 +1,36 @@
-import flet as ft
+
 
 class MainPageView:
-    def __init__(self, page: ft.Page, animador_pagina, animador_botao, controller,main_window):
+    def __init__(self, page ,ft , animador_pagina, animador_botao, controller,main_window):
         self.page = page
+        self.ft = ft 
         self.animador_pagina = animador_pagina
         self.animador_botao = animador_botao
         self.controller = controller
         self.main_window = main_window
+        self.main_window.homeView = self.main_window.homeView(self.ft,self.animador_botao,self.animador_botao,self.controller)
+        self.page_status = self.animador_pagina(self.ft).carregamento_animacao()
+        self.construir_main_page
+         
+        
+      
+
+    def open_home(self):
+     
+        self.page_status = self.main_window.homeView.page
+        self.page_status.update()
+
+    def open_cadastroItem(self):
+    
+        self.page_status = self.ft.Text("ola")  
+        self.page_status.update()
 
     def construir_main_page(self):
         self.page.title = "School Inventory"
         self.page.window_width = 500
         self.page.window_height = 400
         self.page.window_resizable = False
-        self.page.theme_mode = ft.ThemeMode.LIGHT
+        self.page.theme_mode = self.ft.ThemeMode.LIGHT
         self.page.padding = 0
         self.page.margin = 0
        #
@@ -26,52 +43,52 @@ class MainPageView:
         # -------------------
 
 
-        sidebar = ft.NavigationRail(
+        sidebar = self.ft.NavigationRail(
 
             selected_index=0,
-            label_type=ft.NavigationRailLabelType.ALL,
+            label_type=self.ft.NavigationRailLabelType.ALL,
             min_width=90,
             min_extended_width=220,
             group_alignment=-0.2,
-            indicator_color=ft.Colors.BLUE_GREY_100,
-            indicator_shape=ft.RoundedRectangleBorder(radius=12),
-            leading=ft.Container(height=80),
-            on_change=lambda e: print("Selected destination:", e.control.selected_index),
+            indicator_color=self.ft.Colors.BLUE_GREY_100,
+            indicator_shape=self.ft.RoundedRectangleBorder(radius=12),
+            leading=self.ft.Container(height=80),
+            on_change=lambda e: self.controller.page_guia_open(e.control.selected_index),
 
             destinations=[
-                ft.NavigationRailDestination(
+                self.ft.NavigationRailDestination(
                     icon="home",          # <-- COMPATÍVEL COM A TUA VERSÃO
                     label="Home",
-                    selected_icon = ft.Icons.HOME_OUTLINED
+                    selected_icon = self.ft.Icons.HOME_OUTLINED
                 ),
                 
-                ft.NavigationRailDestination(
-                    icon= ft.Icons.OUTBOX,
+                self.ft.NavigationRailDestination(
+                    icon= self.ft.Icons.OUTBOX,
                     label="Emprestar",
-                    selected_icon = ft.Icons.OUTBOX_OUTLINED
+                    selected_icon = self.ft.Icons.OUTBOX_OUTLINED
                 ),
-                 ft.NavigationRailDestination(
-                    icon=ft.Icons.MOVE_TO_INBOX_ROUNDED,
+                 self.ft.NavigationRailDestination(
+                    icon=self.ft.Icons.MOVE_TO_INBOX_ROUNDED,
                     label="Devoluçao",
-                    selected_icon = ft.Icons.MOVE_TO_INBOX_OUTLINED
+                    selected_icon = self.ft.Icons.MOVE_TO_INBOX_OUTLINED
                 ),
-                ft.NavigationRailDestination(
+                self.ft.NavigationRailDestination(
                     icon="inventory",
                     label="Inventário",
-                    selected_icon = ft.Icons.INVENTORY_2_OUTLINED
+                    selected_icon = self.ft.Icons.INVENTORY_2_OUTLINED
                 ),
-                ft.NavigationRailDestination(
+                self.ft.NavigationRailDestination(
                     icon="settings",
                     label="Configurações",
-                    selected_icon = ft.Icons.SETTINGS_OUTLINED
+                    selected_icon = self.ft.Icons.SETTINGS_OUTLINED
                 ),
             ]
             
         )
 
-        self.tela_context =  ft.Container(
+        self.tela_context =  self.ft.Container(
                     expand=True,
-                    content=ft.Text("Conteúdo principal aqui...", size=20),
+                    content=self.ft.Text("Conteúdo principal aqui...", size=20),
                 ),
 
  
@@ -81,56 +98,56 @@ class MainPageView:
       
 
         self.controls = [
-            ft.Text("Cadastro de Item", size=26, weight=ft.FontWeight.BOLD),
+            self.ft.Text("Cadastro de Item", size=26, weight=self.ft.FontWeight.BOLD),
 
-            ft.TextField(label="Nome do Item"),
-            ft.TextField(label="Codificação"),
+            self.ft.TextField(label="Nome do Item"),
+            self.ft.TextField(label="Codificação"),
 
-            ft.Dropdown(label="Categoria", options=[
-                ft.dropdown.Option("Cabeça"),
-                ft.dropdown.Option("Mãos"),
-                ft.dropdown.Option("Corpo"),
+            self.ft.Dropdown(label="Categoria", options=[
+                self.ft.dropdown.Option("Cabeça"),
+                self.ft.dropdown.Option("Mãos"),
+                self.ft.dropdown.Option("Corpo"),
             ]),
 
-            ft.Dropdown(label="Tipo", options=[
-                ft.dropdown.Option("Capacete"),
-                ft.dropdown.Option("Luva"),
-                ft.dropdown.Option("Jaleco"),
+            self.ft.Dropdown(label="Tipo", options=[
+                self.ft.dropdown.Option("Capacete"),
+                self.ft.dropdown.Option("Luva"),
+                self.ft.dropdown.Option("Jaleco"),
             ]),
 
-            ft.TextField(label="Localização"),
+            self.ft.TextField(label="Localização"),
 
-            ft.Dropdown(label="Estado", options=[
-                ft.dropdown.Option("Novo"),
-                ft.dropdown.Option("Em uso"),
-                ft.dropdown.Option("Danificado"),
+            self.ft.Dropdown(label="Estado", options=[
+                self.ft.dropdown.Option("Novo"),
+                self.ft.dropdown.Option("Em uso"),
+                self.ft.dropdown.Option("Danificado"),
             ]),
 
-            ft.ElevatedButton("Salvar Item")
+            self.ft.ElevatedButton("Salvar Item")
         ]
 
 
-        layout = ft.Column(
+        layout = self.ft.Column(
             expand= True,
             controls= [     
-         ft.Container(
-            content=ft.Text(
+         self.ft.Container(
+            content=self.ft.Text(
                 "School Inventory Controller ",
                 size=30,
-                weight=ft.FontWeight.W_900,
+                weight=self.ft.FontWeight.W_900,
                 selectable=True,
             ),
-            margin=ft.margin.symmetric(vertical=30),
+            margin=self.ft.margin.symmetric(vertical=30),
             padding=30,
             bgcolor="grey200",
-            alignment=ft.alignment.center,
+            alignment=self.ft.alignment.center,
 ),
-         ft.Row(
+         self.ft.Row(
             expand=True,
             controls=[
                 sidebar,
-                ft.VerticalDivider(width=1),
-                
+                self.ft.VerticalDivider(width=1),
+                self.page_status               
                  
          
                 

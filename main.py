@@ -33,7 +33,7 @@ from models.item_model import ItemModel
 def main(page: ft.Page):
     controller = ControllerMain()
 
-    view = MainPageView(page,AnimacoesPage,AnimacoesBotao,controller,MainView(CadastroItemView,CadastroItemView,DevolucaoView,emprestimoView,HomeView,LoginView))
+    view = MainPageView(page,ft,AnimacoesPage,AnimacoesBotao,controller,MainView(CadastroItemView,CadastroItemView,DevolucaoView,EmprestimoView,HomeView,LoginView))
     models = MainModel(Database(psycopg2,CONFIG_DB_SCHOOL),CategoriaModel,ItemModel,AcaoPageItem)
 
 

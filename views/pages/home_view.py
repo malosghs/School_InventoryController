@@ -1,56 +1,65 @@
 
 
 class HomeView:
-    def __init__(self,animador_pagina, animador_botao, controller):
+    def __init__(self,ft, animador_pagina, animador_botao, controller):
+ 
+        
+        self.ft = ft 
 
         self.animador_pagina = animador_pagina
         self.animador_botao = animador_botao
         self.controller = controller
 
         self.dict_status_tela = None 
-        self.filters = None
+        self.filters = self.ft.Text("OLa")
         self.itens = None
 
-        self.page = ft.Conteiner(
-            alignment=ft.MainAxisAlignment.CENTER,
-            controls = [
-            ft.Container( # Filtros
-                controls=self.filters,
-                expand = True,
+        self.page = self.ft.Column(
+           
+            
+            [
+            self.ft.Container( # Filtros
+              
+                content=self.filters,
                 margin=10,
                 padding=10,
-                alignment=ft.alignment.center,
-                bgcolor=ft.Colors.AMBER,
-                width=400,
-                height=100,
+                alignment=self.ft.alignment.center,
+                bgcolor=self.ft.Colors.GREY,
+                width=1100,
+                height=120,
+             
                 border_radius=10,
         ), 
-            ft.Conteiner( # Itens 
+            self.ft.Container( # Itens 
                 expand = True,
                 margin=10,
                 padding=10,
-                alignment=ft.alignment.center,
-                bgcolor=ft.Colors.AMBER,
-                width=450,
-                height=350,
-                content = ft.Row(
+                alignment=self.ft.alignment.center,
+                bgcolor=self.ft.Colors.GREY,
+                width=1350,
+                border_radius=7,
+                content = self.ft.Row(
                     controls =  self.itens
                 )
         )
         
             ],
+            expand = True,
+            alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER
+           
         )
-
+      
       
     def page_open():
         self.controls = [
             
-            ft.Text("Dashboard", size=26, weight=ft.FontWeight.BOLD),
+            self.ft.Text("Dashboard", size=26, weight=self.ft.FontWeight.BOLD),
 
-            ft.Row([
+            self.ft.Row([
                
             ])
         ]
+    
 async def gerador_cards(self,list_items):
         self.itens =  self.animador_pagina.carregamento_animacao()    
         
@@ -59,27 +68,27 @@ async def gerador_cards(self,list_items):
         
         for modelItem in list_items:
                 self.itens.append(
-                    ft.Card(
-                    leading=ft.IconButton(
-                    icon = ft.Icons.INFO,
+                    self.ft.Card(
+                    leading=self.ft.IconButton(
+                    icon = self.ft.Icons.INFO,
                    # on_click = 
                     ),
-                    content=ft.Container(
-                    content=ft.Column(
+                    content=self.ft.Container(
+                    content=self.ft.Column(
                     [
-                        ft.ListTile(
+                        self.ft.ListTile(
                            
-                            title=ft.Text(modelItem.item.nome),
-                            subtitle=ft.Text(
+                            title=self.ft.Text(modelItem.item.nome),
+                            subtitle=self.ft.Text(
                             "# Depois preencher "
                         ),
-                        bgcolor=ft.Colors.GREY_400,
+                        bgcolor=self.ft.Colors.GREY_400,
                         ),
-                        ft.Row(
+                        self.ft.Row(
                              [ 
-                            [ft.TextButton(modelItem.item.status_butao)]
+                            [self.ft.TextButton(modelItem.item.status_butao)]
                              ],
-                             alignment=ft.MainAxisAlignment.Center,
+                             alignment=self.ft.MainAxisAlignment.Center,
                         ),
                     ]
                     ),
@@ -87,7 +96,7 @@ async def gerador_cards(self,list_items):
                     height=150,
                     padding=10,
                     ),
-                    shadow_color=ft.Colors.ON_SURFACE_VARIANT,
+                    shadow_color=self.ft.Colors.ON_SURFACE_VARIANT,
                     )
                 )
         self.itens = itens
