@@ -28,5 +28,5 @@ class EmprestimoView:
             self.ft.ElevatedButton("Registrar Empréstimo")
         ],
          expand = True,
-         alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER
+         alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.START
         )

@@ -14,12 +14,18 @@ class ConfiguracoesView:
 
 
         self.page =self.ft.Column( [
+        self.ft.Tabs(
+        selected_index=1,
+        animation_duration=300,
+        tabs=[
+           
+
             self.ft.Tab(text="Usuários", content=self.usuarios_tab()),
             self.ft.Tab(text="Dados de Itens", content=self.config_item_tab())
         ],
         expand = True,
-        alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER
-)
+       
+         ) ] )
 
     def usuarios_tab(self):
         return self.ft.Column([
