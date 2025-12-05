@@ -182,9 +182,9 @@ class Database():
             print("Erro ao buscar item:", e)
             
 """
-    def add_item(conn,dict):
+    def add_item(conn,inventario):
         "Entrada é um dicionario dos Itens que já foram cadastrados"
-        """
+        user = """
         INSERT INTO school_inventory 
         (nome_item, categoria, tipo, number_local, estado_uso, status, descricao)
         VALUES (%s, %s, %s, %s, %s, %s, %s)"""
@@ -211,7 +211,7 @@ class Database():
 
 
 
-    def add_user(conn,dict):
+    def add_user(conn,usuarios):
         "Entrada é um dicionario dos users que já foram cadastrados"
         for item in usuarios:
                      nome  = item["Nome"]
