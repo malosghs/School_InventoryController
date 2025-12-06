@@ -11,8 +11,7 @@ class ItemModel:
 
 
 class Item:
-   def __init__(self,id,nome,codigo,categoria,tipo,localizacao,estado,status,descrisao):
-      dic = {'emprestado':'Devolver','devolvido':'Emprestar'}
+   def __init__(self,id,nome,codigo,categoria,tipo,localizacao,estado,status,descrisao,status_butao):
       self.id =           id 
       self.nome =         nome
       self.codigo =       codigo
@@ -22,6 +21,6 @@ class Item:
       self.estado =       estado
       self.status =       status 
       self.descrisao =    descrisao 
-      self.status_butao = dic[status]
+      self.status_butao = status_butao
    
 

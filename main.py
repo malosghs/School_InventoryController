@@ -1,6 +1,9 @@
+# Bibliotecas 
 
 import flet as ft
 import psycopg2
+import time
+import threading
 
 # View imports
  
@@ -14,6 +17,7 @@ from views.pages.configuracoes_view import ConfiguracoesView
 from views.pages.devolucao_view import DevolucaoView
 from views.pages.emprestimo_view import EmprestimoView
 from views.pages.home_view import HomeView
+from views.pages.inventario_view import InventarioView
 from views.pages.login_view import LoginView
 from views.pages.main_view import MainView
 
@@ -33,7 +37,7 @@ from models.item_model import ItemModel
 def main(page: ft.Page):
     controller = ControllerMain()
 
-    view = MainPageView(page,ft,AnimacoesPage,AnimacoesBotao,controller,MainView(CadastroItemView,ConfiguracoesView,DevolucaoView,EmprestimoView,HomeView,LoginView))
+    view = MainPageView(page,ft,AnimacoesPage,AnimacoesBotao,controller,MainView(CadastroItemView,ConfiguracoesView,DevolucaoView,EmprestimoView,HomeView,LoginView,InventarioView),time,threading)
     models = MainModel(Database(psycopg2,CONFIG_DB_SCHOOL),CategoriaModel,ItemModel,AcaoPageItem)
 
 

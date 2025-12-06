@@ -50,23 +50,148 @@ class HomeView:
         )
       
       
-    def page_open():
-        self.controls = [
-            
-            self.ft.Text("Dashboard", size=26, weight=self.ft.FontWeight.BOLD),
 
-            self.ft.Row([
-               
-            ])
-        ]
     
 async def gerador_cards(self,list_items):
         self.itens =  self.animador_pagina.carregamento_animacao()    
-        
-        itens = []
+        banco = [{
+        "id":0,
+        "Nome_do_Item": "Mouse USB",
+        "Codificacao": "IT-001",
+        "Categoria": "Periférico",
+        "Tipo": "Mouse",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Mouse USB padrão para estações de trabalho.",
+        "":"Emprestar"
+    },
+    {  
+        "id":1,
+        "Nome_do_Item": "Teclado USB",
+        "Codificacao": "IT-002",
+        "Categoria": "Periférico",
+        "Tipo": "Teclado",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Teclado USB padrão ABNT2.",
+        "":"Emprestar"
+    },
+    {
+        "id":2,
+        "Nome_do_Item": "Headset com Microfone",
+        "Codificacao": "IT-003",
+        "Categoria": "Áudio",
+        "Tipo": "Headset",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Headset com microfone para reuniões e chamadas.",
+        "":"Emprestar"
+    },
+    { 
+        "id":3,
+        "Nome_do_Item": "Cabo HDMI 1.8m",
+        "Codificacao": "IT-004",
+        "Categoria": "Cabos",
+        "Tipo": "HDMI",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Cabo HDMI de 1.8 metros para vídeo.",
+        "":"Emprestar"
+    },
+    {
+         "id":4,
+        "Nome_do_Item": "Cabo VGA 1.5m",
+        "Codificacao": "IT-005",
+        "Categoria": "Cabos",
+        "Tipo": "VGA",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Cabo VGA de 1.5 metros para monitores antigos.",
+        "":"Emprestar"
+    },
+    {
+         "id":5,
+        "Nome_do_Item": "Adaptador USB-C → HDMI",
+        "Codificacao": "IT-006",
+        "Categoria": "Adaptadores",
+        "Tipo": "USB-C para HDMI",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Adaptador para conectar USB-C a HDMI.",
+        "":"Emprestar"
+    },
+    {
+         "id":6,
+        "Nome_do_Item": "Pen Drive 32GB",
+        "Codificacao": "IT-007",
+        "Categoria": "Armazenamento",
+        "Tipo": "Pen Drive",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Pen drive de 32GB.",
+        "":"Emprestar"
+    },
+    {
+         "id":7,
+        "Nome_do_Item": "Roteador Wi-Fi",
+        "Codificacao": "IT-008",
+        "Categoria": "Rede",
+        "Tipo": "Roteador",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Roteador Wi-Fi padrão para redes locais.",
+        "":"Emprestar"
+    },
+    {
+         "id":8,
+        "Nome_do_Item": "Switch 24 portas",
+        "Codificacao": "IT-009",
+        "Categoria": "Rede",
+        "Tipo": "Switch",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Switch gerenciável de 24 portas.",
+        "":"Emprestar"
+    },
+    {
+        "id":9,
+        "Nome_do_Item": "Patch Cords diversos",
+        "Codificacao": "IT-010",
+        "Categoria": "Cabos de Rede",
+        "Tipo": "Patch Cord",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Patch cords de vários tamanhos e cores.",
+        "":"Emprestar"
+    },
+    {
+        "id":10, 
+        "Nome_do_Item": "Nobreak 1400VA",
+        "Codificacao": "IT-011",
+        "Categoria": "Energia",
+        "Tipo": "Nobreak",
+        "Localizacao": "Almoxarifado",
+        "Estado_de_Uso": "Novo",
+        "Status": "Disponível",
+        "Descricao": "Nobreak 1400VA para proteção de equipamentos.",
+        "":"Emprestar"
+    }
+        ]
+       
+        itens = [i for i in banco ]
 
         
-        for modelItem in list_items:
+        for modelItem in itens:#list_items:
                 self.itens.append(
                     self.ft.Card(
                     leading=self.ft.IconButton(

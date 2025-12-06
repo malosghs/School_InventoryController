@@ -1,8 +1,7 @@
-import time
-import threading
+
 
 class MainPageView:
-    def __init__(self, page, ft, animador_pagina, animador_botao, controller, main_window):
+    def __init__(self, page, ft, animador_pagina, animador_botao, controller, main_window,time,threading):
         self.page = page
         self.ft = ft
         self.animador_pagina = animador_pagina
@@ -11,6 +10,8 @@ class MainPageView:
         self.main_window = main_window
         self.carregando = False
         self.controller.view = self 
+        self.time = time 
+        self.threading = threading
 
 
 
@@ -57,13 +58,13 @@ class MainPageView:
 
     def navegar(self, index):
 
-        threading.Thread(target=self._processar_navegacao, args=(index,), daemon=True).start()
+        self.threading.Thread(target=self._processar_navegacao, args=(index,), daemon=True).start()
 
     def _processar_navegacao(self, index):
         self.carregando = True
 
 
-        threading.Thread(target=self._monitorar_tempo_carregamento, daemon=True).start()
+        self.threading.Thread(target=self._monitorar_tempo_carregamento, daemon=True).start()
 
 
         if index == 0:
@@ -87,7 +88,7 @@ class MainPageView:
 
     def _monitorar_tempo_carregamento(self):
 
-        time.sleep(0.2)
+        self.time.sleep(0.2)
         if self.carregando:
             self.container_conteudo.content = self.animador_pagina(self.ft).carregamento_animacao()
             self.container_conteudo.update()
@@ -95,7 +96,7 @@ class MainPageView:
 
 
     def _obter_conteudo_pages(self,local,caminho):
-        time.sleep(0.5) 
+        self.time.sleep(0.5) 
         if hasattr(self.main_window,local) and hasattr(caminho, 'page'):
              return caminho.page
         else:
