@@ -1,229 +1,126 @@
 
+from datetime import datetime
 
 class HomeView:
-    def __init__(self,ft, animador_pagina, animador_botao, controller):
- 
-        
-        self.ft = ft 
+    def __init__(self, ft, animador_pagina, animador_botao, controller_main):
+        self.ft = ft
+        self.controller = controller_main
 
-        self.animador_pagina = animador_pagina
-        self.animador_botao = animador_botao
-        self.controller = controller
-
-        self.dict_status_tela = None 
-        self.filters = self.ft.Text("OLa")
-        self.itens = None
-
-        self.page = self.ft.Column(
-           
-            
-            [
-            self.ft.Container( # Filtros
-              
-                content=self.filters,
-                margin=10,
-                padding=10,
-                alignment=self.ft.alignment.center,
-                bgcolor=self.ft.Colors.GREY,
-                width=1100,
-                height=120,
-             
-                border_radius=10,
-        ), 
-            self.ft.Container( # Itens 
-                expand = True,
-                margin=10,
-                padding=10,
-                alignment=self.ft.alignment.center,
-                bgcolor=self.ft.Colors.GREY,
-                width=1350,
-                border_radius=7,
-                content = self.ft.Row(
-                    controls =  self.itens
-                )
-        )
-        
-            ],
-            expand = True,
-            alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER
-           
-        )
-      
-      
-
-    
-async def gerador_cards(self,list_items):
-        self.itens =  self.animador_pagina.carregamento_animacao()    
-        banco = [{
-        "id":0,
-        "Nome_do_Item": "Mouse USB",
-        "Codificacao": "IT-001",
-        "Categoria": "Periférico",
-        "Tipo": "Mouse",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Mouse USB padrão para estações de trabalho.",
-        "":"Emprestar"
-    },
-    {  
-        "id":1,
-        "Nome_do_Item": "Teclado USB",
-        "Codificacao": "IT-002",
-        "Categoria": "Periférico",
-        "Tipo": "Teclado",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Teclado USB padrão ABNT2.",
-        "":"Emprestar"
-    },
-    {
-        "id":2,
-        "Nome_do_Item": "Headset com Microfone",
-        "Codificacao": "IT-003",
-        "Categoria": "Áudio",
-        "Tipo": "Headset",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Headset com microfone para reuniões e chamadas.",
-        "":"Emprestar"
-    },
-    { 
-        "id":3,
-        "Nome_do_Item": "Cabo HDMI 1.8m",
-        "Codificacao": "IT-004",
-        "Categoria": "Cabos",
-        "Tipo": "HDMI",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Cabo HDMI de 1.8 metros para vídeo.",
-        "":"Emprestar"
-    },
-    {
-         "id":4,
-        "Nome_do_Item": "Cabo VGA 1.5m",
-        "Codificacao": "IT-005",
-        "Categoria": "Cabos",
-        "Tipo": "VGA",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Cabo VGA de 1.5 metros para monitores antigos.",
-        "":"Emprestar"
-    },
-    {
-         "id":5,
-        "Nome_do_Item": "Adaptador USB-C → HDMI",
-        "Codificacao": "IT-006",
-        "Categoria": "Adaptadores",
-        "Tipo": "USB-C para HDMI",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Adaptador para conectar USB-C a HDMI.",
-        "":"Emprestar"
-    },
-    {
-         "id":6,
-        "Nome_do_Item": "Pen Drive 32GB",
-        "Codificacao": "IT-007",
-        "Categoria": "Armazenamento",
-        "Tipo": "Pen Drive",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Pen drive de 32GB.",
-        "":"Emprestar"
-    },
-    {
-         "id":7,
-        "Nome_do_Item": "Roteador Wi-Fi",
-        "Codificacao": "IT-008",
-        "Categoria": "Rede",
-        "Tipo": "Roteador",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Roteador Wi-Fi padrão para redes locais.",
-        "":"Emprestar"
-    },
-    {
-         "id":8,
-        "Nome_do_Item": "Switch 24 portas",
-        "Codificacao": "IT-009",
-        "Categoria": "Rede",
-        "Tipo": "Switch",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Switch gerenciável de 24 portas.",
-        "":"Emprestar"
-    },
-    {
-        "id":9,
-        "Nome_do_Item": "Patch Cords diversos",
-        "Codificacao": "IT-010",
-        "Categoria": "Cabos de Rede",
-        "Tipo": "Patch Cord",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Patch cords de vários tamanhos e cores.",
-        "":"Emprestar"
-    },
-    {
-        "id":10, 
-        "Nome_do_Item": "Nobreak 1400VA",
-        "Codificacao": "IT-011",
-        "Categoria": "Energia",
-        "Tipo": "Nobreak",
-        "Localizacao": "Almoxarifado",
-        "Estado_de_Uso": "Novo",
-        "Status": "Disponível",
-        "Descricao": "Nobreak 1400VA para proteção de equipamentos.",
-        "":"Emprestar"
-    }
-        ]
        
-        itens = [i for i in banco ]
-
+        self.db_inv = controller_main.inventario if hasattr(controller_main, 'inventario') else None
+        self.db_user = controller_main.database if hasattr(controller_main, 'database') else None
         
-        for modelItem in itens:#list_items:
-                self.itens.append(
-                    self.ft.Card(
-                    leading=self.ft.IconButton(
-                    icon = self.ft.Icons.INFO,
-                   # on_click = 
-                    ),
-                    content=self.ft.Container(
-                    content=self.ft.Column(
-                    [
-                        self.ft.ListTile(
-                           
-                            title=self.ft.Text(modelItem.item.nome),
-                            subtitle=self.ft.Text(
-                            "# Depois preencher "
-                        ),
-                        bgcolor=self.ft.Colors.GREY_400,
-                        ),
-                        self.ft.Row(
-                             [ 
-                            [self.ft.TextButton(modelItem.item.status_butao)]
-                             ],
-                             alignment=self.ft.MainAxisAlignment.Center,
-                        ),
-                    ]
-                    ),
-                    width=100,
-                    height=150,
-                    padding=10,
-                    ),
-                    shadow_color=self.ft.Colors.ON_SURFACE_VARIANT,
+     
+        self.card_total = self._build_card("Total Itens", "0", self.ft.Icons.INVENTORY_2, "blue")
+        self.card_disp = self._build_card("Disponíveis", "0", self.ft.Icons.CHECK_CIRCLE, "green")
+        self.card_emp = self._build_card("Emprestados", "0", self.ft.Icons.OUTBOX, "orange")
+        self.card_users = self._build_card("Usuários", "0", self.ft.Icons.PEOPLE, "purple")
+        
+       
+        self.lista_alertas = self.ft.ListView(expand=True, spacing=10, padding=10)
+
+        self.page = self.build()
+      
+        self.atualizar_dados()
+
+    def build(self):
+        return self.ft.Container(
+            expand=True, 
+            padding=30, 
+            bgcolor="#f4f7f6",
+            content=self.ft.Column([
+                self.ft.Text("Dashboard Geral", size=30, weight="bold", color="#2c3e50"),
+                self.ft.Divider(height=20, color="transparent"),
+                
+           
+                self.ft.Row([
+                    self.card_total,
+                    self.card_disp,
+                    self.card_emp,
+                    self.card_users
+                ], alignment="spaceBetween"),
+                
+                self.ft.Divider(height=30, color="transparent"),
+                
+             
+                self.ft.Container(
+                    expand=True,
+                    bgcolor="white", 
+                    border_radius=15,
+                    padding=20,
+                    shadow=self.ft.BoxShadow(blur_radius=10, color=self.ft.Colors.BLACK12),
+                    content=self.ft.Column([
+                        self.ft.Row([
+                            self.ft.Icon(self.ft.Icons.WARNING_AMBER_ROUNDED, color="red", size=28),
+                            self.ft.Text("Alertas & Status", size=20, weight="bold", color="#333")
+                        ]),
+                        self.ft.Divider(),
+                        self.lista_alertas
+                    ])
+                )
+            ])
+        )
+
+    def _build_card(self, titulo, valor, icone, cor):
+        return self.ft.Container(
+            width=220, height=120, 
+            bgcolor="white", 
+            border_radius=15, 
+            padding=20,
+            shadow=self.ft.BoxShadow(blur_radius=10, color=self.ft.Colors.BLACK12),
+            content=self.ft.Column([
+               
+                self.ft.Row([
+                    self.ft.Icon(icone, color=cor, size=30),
+                    self.ft.Text(titulo, color="grey", weight="bold")
+                ], alignment="spaceBetween"),
+                
+                self.ft.Text(valor, size=32, weight="bold", color="#333")
+            ], alignment="spaceBetween")
+        )
+
+    def atualizar_dados(self):
+      
+        if not self.db_inv or not self.db_user:
+            return
+
+        itens = self.db_inv.get_todos_itens()
+        users = self.db_user.get_todos_usuarios()
+        
+        total = len(itens)
+        emp = len([i for i in itens if i['Sts'] == "Emprestado"])
+        disp = total - emp
+        total_users = len(users)
+        
+ 
+        self.card_total.content.controls[1].value = str(total)
+        self.card_disp.content.controls[1].value = str(disp)
+        self.card_emp.content.controls[1].value = str(emp)
+        self.card_users.content.controls[1].value = str(total_users)
+        
+    
+        self.lista_alertas.controls.clear()
+        
+  
+        emprestados = [i for i in itens if i['Sts'] == "Emprestado"]
+        
+        if not emprestados:
+            self.lista_alertas.controls.append(
+                self.ft.Text("Nenhum item pendente de devolução.", color="green")
+            )
+        else:
+            for item in emprestados:
+                resp = item.get('Resp', 'Desconhecido')
+                self.lista_alertas.controls.append(
+                    self.ft.ListTile(
+                        leading=self.ft.Icon(self.ft.Icons.CIRCLE, color="orange", size=15),
+                        title=self.ft.Text(f"{item['Nome']} ({item['Cod']})"),
+                        subtitle=self.ft.Text(f"Responsável: {resp}"),
+                        trailing=self.ft.Icon(self.ft.Icons.ARROW_FORWARD_IOS, size=14)
                     )
                 )
-        self.itens = itens
 
-    
+        try:
+            self.page.update()
+        except: 
+            pass
