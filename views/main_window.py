@@ -45,6 +45,12 @@ class MainPageView:
                     self.animador_botao,
                     self.controller
                 )
+        self.main_window.inventarioView = self.main_window.inventarioView(
+                    self.ft, 
+                    self.animador_pagina,
+                    self.animador_botao,
+                    self.controller
+                )
 
 
 
@@ -74,7 +80,7 @@ class MainPageView:
         elif index == 2:
             novo_conteudo = self._obter_conteudo_pages('devolucaoView',self.main_window.devolucaoView)
         elif index == 3:
-              novo_conteudo = self.ft.Text("Inventario em construçao  (Em construção)")
+              novo_conteudo =self._obter_conteudo_pages('inventarioView',self.main_window.inventarioView)
         elif index == 4:
             novo_conteudo = self._obter_conteudo_pages('configuracoesView',self.main_window.configuracoesView)   
         else:
