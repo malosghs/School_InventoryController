@@ -1,12 +1,63 @@
 import time
 import random
+import psycopg2
+from models.database import Database  
+from models.config_database import CONFIG_DB_SCHOOL
 
+class Database_oficial:
+    def __init__(self):
+        self.db_manager = Database(CONFIG_DB_SCHOOL) 
+        self.conn = self.db_manager.get_db_connect()
+        
+    def _execute_select(self, query, params=None):
+        """Método auxiliar para executar consultas SELECT e retornar resultados."""
+        if not self.conn:
+            return []
+        try:
+            with self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(query, params)
+                return [dict(row) for row in cursor.fetchall()] 
+        except Exception as e:
+            print(f"Erro ao executar consulta: {e}")
+            return []
+    def get_todos_usuarios(self):
+        """Busca todos os usuários do controller_users."""
+        user = """
+        SELECT id, nome_user AS nome, cargo_operacional AS cargo, user_login AS user, senha 
+        FROM controller_users
+        WHERE status = TRUE;
+        """
+        return self._execute_select(user)
+    def list_items(self):
+        """Retorna todos os itens do inventário, chamando o método do Database."""
+        if self.conn:
+            return self.db_manager.list_items(self.conn)
+        return []
+
+    def get_todos_itens(self):
+        """Busca todos os itens do school_inventory."""
+        seila = """
+        SELECT 
+            id, 
+            nome_item AS "Nome", 
+            cod_item AS "Cod", 
+            categoria AS "Cat", 
+            CASE 
+                WHEN status = TRUE THEN 'Emprestado' 
+                ELSE 'Disponível' 
+            END AS "Sts", 
+            tipo AS "Tipo", 
+            descricao AS "Desc",
+            number_local AS "Loc_ID", 
+            estado_uso AS "Est_ID"    
+        FROM school_inventory;
+        """
+        return self._execute_select(seila)
 
 class DatabaseTemporario:
-    def __init__(self):
-        self.usuarios = [
-            {"id": "1", "nome": "Admin", "cpf": "000.000.000-00", "user": "admin", "cargo": "Diretor", "senha": "123"}
-        ]
+    def __init__(self, database_manager):
+        self.database = database_manager 
+        self.usuarios = self.database.get_todos_usuarios() 
         self.dados_aux = {
             "categorias": [ "Eletronico", "Mobiliaria"],
             "tipos": ["Item", "EPI"],
@@ -14,7 +65,8 @@ class DatabaseTemporario:
         }
 
 
-    def get_todos_usuarios(self): return self.usuarios
+    def get_todos_usuarios(self): 
+        return self.database.get_todos_usuarios()
     
     def adicionar_usuario(self, nome, cpf, user, cargo, senha):
         if not nome or not user: return False, "Preencha dados!"
@@ -35,7 +87,6 @@ class DatabaseTemporario:
         self.usuarios = [u for u in self.usuarios if u["id"] != id_u]
         return len(self.usuarios) < ini, "Removido."
 
-    # --- Auxiliares ---
     def get_auxiliar(self, k): return self.dados_aux.get(k, [])
     def add_auxiliar(self, k, v): 
         if v and v not in self.dados_aux[k]: self.dados_aux[k].append(v); return True
@@ -47,12 +98,9 @@ class DatabaseTemporario:
 
 
 class InventarioDatabase:
-    def __init__(self):
-  
-        self.db_itens = [
-            {"id": 1, "Nome": "Notebook Dell", "Cod": "IT-100", "Cat": "Hardware", "Sts": "Emprestado", "Loc": "TI", "Est": "Novo", "Tipo": "PC", "Desc": "i7 16GB", "Resp": "João"},
-            {"id": 2, "Nome": "Mouse USB", "Cod": "IT-101", "Cat": "Periférico", "Sts": "Disponível", "Loc": "Almoxarifado", "Est": "Bom", "Tipo": "Mouse", "Desc": "Logitech", "Resp": ""},
-        ]
+    def __init__(self, db_manager): 
+        self.db_manager = db_manager
+        self.db_itens = self.db_manager.list_items()
 
     def get_todos_itens(self): return self.db_itens
 
@@ -88,13 +136,13 @@ class InventarioDatabase:
                     return True, "Item Devolvido!"
         return False, "Item não encontrado"
 
-
 class ControllerMain:
    def __init__(self):
       self.view = None
-      self.database = DatabaseTemporario() 
-      self.inventario = InventarioDatabase()
-      self.escolha_page_open = None 
+      self.db_manager = Database_oficial()
+      self.database = DatabaseTemporario(self.db_manager) 
+      self.inventario = InventarioDatabase(self.db_manager)
+      self.escolha_page_open = None
       
    def construir_page(self):
       if self.view: self.view.construir_pagina_principal()

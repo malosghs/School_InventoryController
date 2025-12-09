@@ -38,7 +38,7 @@ def main(page: ft.Page):
     controller = ControllerMain()
 
     view = MainPageView(page,ft,AnimacoesPage,AnimacoesBotao,controller,MainView(CadastroItemView,ConfiguracoesView,DevolucaoView,EmprestimoView,HomeView,LoginView,InventarioView),time,threading)
-    models = MainModel(Database(psycopg2,CONFIG_DB_SCHOOL),CategoriaModel,ItemModel,AcaoPageItem)
+    models = MainModel(Database(CONFIG_DB_SCHOOL),CategoriaModel,ItemModel,AcaoPageItem)
 
 
     controller.view = view 
