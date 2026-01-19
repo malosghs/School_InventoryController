@@ -146,24 +146,25 @@ class Database:
             return False, f"Erro na operação: {e}"
     def add_items(self, inventario):
         """inventario: lista de dicionários. Campos esperados por item:
-           'Nome_do_Item','Categoria','Tipo','Localizacao'(int id),
-           'Estado_de_Uso'(int id),'Status'(bool),'Descricao' e opcional 'Quantidade'
+        'Nome_do_Item','Cod_Item','Categoria','Tipo','Localizacao'(int id),
+        'Estado_de_Uso'(int id),'Status'(bool),'Descricao' e opcional 'Quantidade'
         """
         inserir = (
-            "INSERT INTO school_inventory (nome_item, categoria, tipo, number_local, estado_uso, status, descricao)"
-            " VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            "INSERT INTO school_inventory (nome_item, cod_item, categoria, tipo, number_local, estado_uso, status, descricao)"
+            " VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         )
 
         for item in inventario:
             quantidade = int(item.get("Quantidade", 1) or 1)
             nome = item.get("Nome_do_Item")
+            cod = item.get("Cod_Item")   
             categoria = item.get("Categoria")
             tipo = item.get("Tipo")
             local = item.get("Localizacao")
             estado = item.get("Estado_de_Uso")
-            status = item.get("Status", True)
+            status = item.get("Status", False)
             descricao = item.get("Descricao")
-            params = (nome, categoria, tipo, local, estado, status, descricao)
+            params = (nome, cod, categoria, tipo, local, estado, status, descricao)
 
             for _ in range(quantidade):
                 try:
@@ -176,6 +177,7 @@ class Database:
                         self.conn.rollback()
                     except Exception:
                         pass
+
 
     def add_users(self, usuarios):
         """usuarios: lista de dicionários com chaves 'Nome','Cargo','Nivel_Acesso','Senha','Status'"""
@@ -227,4 +229,4 @@ class Database:
         except Exception as e:
             print(f"❌ Erro ao listar itens no Database: {e}")
             return []
-
+ 

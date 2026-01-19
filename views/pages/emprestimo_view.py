@@ -81,13 +81,13 @@ class EmprestimoView:
             print(f"Erro ao carregar itens: {e}")
             self.dd_item.options = []
 
-        # 2. Carrega Usuários
+      
         try:
             todos_users = self.db_user.get_todos_usuarios()
             self.dd_user.options = [
                 self.ft.dropdown.Option(
-                    key=u['nome'], 
-                    text=f"{u['nome']} - {u['cargo']}"
+                    key=u['Nome'], 
+                    text=f"{u['Nome']} - {u['Cargo']}"
                 ) for u in todos_users
             ]
         except Exception as e:
@@ -100,28 +100,41 @@ class EmprestimoView:
             pass
 
     def salvar(self, e):
- 
         if not self.dd_item.value:
             self._notificar(e.page, "Erro: Selecione um item!", "red")
             return
-            
+                
         if not self.dd_user.value:
             self._notificar(e.page, "Erro: Selecione um responsável!", "red")
             return
 
-        ok, msg = self.db_inv.realizar_emprestimo(int(self.dd_item.value), self.dd_user.value)
+        try:
+            item_id = int(self.dd_item.value)
 
-        if ok:
-            self._notificar(e.page, msg, "green")
-            
-            self.dd_item.value = None
-            self.dd_user.value = None
+            nome_usuario = self.dd_user.value
 
-            self.carregar_dados()
-        else:
-            self._notificar(e.page, msg, "red")
+            with self.db_user.database.conn.cursor() as cursor:
+                cursor.execute("SELECT id FROM controller_users WHERE nome_user = %s", (nome_usuario,))
+                result = cursor.fetchone()
+                if not result:
+                    self._notificar(e.page, "Erro: Usuário não encontrado!", "red")
+                    return
+                id_usuario = result[0]
+
+            ok, msg = self.db_inv.realizar_emprestimo(item_id, id_usuario)
+            if ok:
+                self._notificar(e.page, msg, "green")
+                self.dd_item.value = None
+                self.dd_user.value = None
+                self.carregar_dados()
+            else:
+                self._notificar(e.page, msg, "red")
+
+        except Exception as ex:
+            self._notificar(e.page, f"Erro ao salvar empréstimo: {ex}", "red")
 
         e.page.update()
+
 
     def _notificar(self, page, texto, cor):
         if page:

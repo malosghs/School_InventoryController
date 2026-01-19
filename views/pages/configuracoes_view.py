@@ -83,18 +83,17 @@ class UsuariosTab:
             shadow=self.ft.BoxShadow(blur_radius=5, color=self.ft.Colors.BLACK12),
             content=self.ft.Row([
                 self.ft.Icon(self.ft.Icons.PERSON, color="blue", size=30),
-                
+
                 self.ft.Column([
-                    self.ft.Text(u['nome'], weight="bold"),
-                    self.ft.Text(f"{u['cargo']} | {u['user']}", size=12, color="grey")
+                    self.ft.Text(u['Nome'], weight="bold"),
+                    self.ft.Text(f"{u['Cargo']} | {u['User']}", size=12, color="grey")
                 ], expand=True),
-                
-              
+
                 self.ft.Row([
                     self.ft.IconButton(
                         icon=self.ft.Icons.EDIT, icon_color="blue", tooltip="Editar",
                         data=u,
-                        on_click=lambda e: self.abrir_modal(e, e.control.data) 
+                        on_click=lambda e: self.abrir_modal(e, e.control.data)
                     ),
                     self.ft.IconButton(
                         icon=self.ft.Icons.DELETE, icon_color="red", tooltip="Excluir",
@@ -104,6 +103,7 @@ class UsuariosTab:
                 ])
             ])
         )
+
 
 
     def abrir_modal(self, e, usuario):
